@@ -1,35 +1,22 @@
+// app/page.js
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function HomePage() {
-  const [viewportHeight, setViewportHeight] = useState(0);
+  // L'import de Header n'est plus nécessaire ici
+  // const [viewportHeight, setViewportHeight] = useState(0);
+  // Le useEffect n'est plus nécessaire car la hauteur est gérée par CSS
 
-  useEffect(() => {
-    // Calcule la hauteur restante après le header (environ 120px)
-    const updateHeight = () => {
-      const headerHeight = 120;
-      setViewportHeight(window.innerHeight - headerHeight);
-    };
-    updateHeight();
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
-  }, []);
+  // Remarque : Si vous voulez garder le useEffect pour d'autres raisons,
+  // vous pouvez le laisser, mais ce n'est plus nécessaire pour la hauteur de l'iframe.
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center">
-      <header className="p-4 text-center">
-        <h1 className="text-3xl font-bold mb-2">
-          Tableau de bord climatique du Canada (2019–2024)
-        </h1>
-        <p className="text-gray-600">
-          Explorez les données grâce aux filtres intégrés dans Power BI.
-        </p>
-      </header>
-
+    // Ce conteneur doit s'adapter à la taille de son parent (`<main>`)
+    <div className="w-full h-full">
       <iframe
-        title="visualisation"
-        style={{ width: "100%", height: `${viewportHeight}px` }}
+        title="visualisation Power BI"
+        className="w-full h-full"
         src="https://app.powerbi.com/reportEmbed?reportId=de7d74d4-466a-4fb1-9303-6392cb411d4f&autoAuth=true&ctid=ad8a84ef-f1f3-4b14-ad08-b99ca66f7e30"
         frameBorder="0"
         allowFullScreen
