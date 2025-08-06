@@ -1,26 +1,21 @@
-// app/page.js
-"use client";
-
-import { useEffect } from "react";
-
-export default function HomePage() {
-  // L'import de Header n'est plus nécessaire ici
-  // const [viewportHeight, setViewportHeight] = useState(0);
-  // Le useEffect n'est plus nécessaire car la hauteur est gérée par CSS
-
-  // Remarque : Si vous voulez garder le useEffect pour d'autres raisons,
-  // vous pouvez le laisser, mais ce n'est plus nécessaire pour la hauteur de l'iframe.
-
+export default function Home() {
   return (
-    // Ce conteneur doit s'adapter à la taille de son parent (`<main>`)
-    <div className="w-full h-full">
-      <iframe
-        title="visualisation Power BI"
-        className="w-full h-full"
-        src="https://app.powerbi.com/reportEmbed?reportId=de7d74d4-466a-4fb1-9303-6392cb411d4f&autoAuth=true&ctid=ad8a84ef-f1f3-4b14-ad08-b99ca66f7e30"
-        frameBorder="0"
-        allowFullScreen
-      ></iframe>
+    <div className="p-6">
+      <h1 className="text-3xl font-bold mb-4">Bienvenue</h1>
+      <p>
+        Ce tableau de bord présente les données climatiques du Canada entre 2019
+        et 2024.
+        <br />
+        Explorez les graphiques, statistiques et autres visualisations pour
+        mieux comprendre les tendances par province.
+      </p>
+
+      <h2 className="text-xl font-semibold mt-6 mb-2">Équipe du projet</h2>
+      <ul className="list-disc list-inside">
+        <li>Abdelmalek Bezri</li>
+        <li>Saddem Chorfi</li>
+        <li>Mamadou Lamine Sall</li>
+      </ul>
     </div>
   );
 }

@@ -1,76 +1,34 @@
 "use client";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// const provinces = [
-//   "Québec",
-//   "Ontario",
-//   "Alberta",
-//   "Manitoba",
-//   "Saskatchewan",
-//   "Colombie-Britannique",
-//   "Nouvelle-Écosse",
-//   "Nouveau-Brunswick",
-//   "Île-du-Prince-Édouard",
-//   "Terre-Neuve-et-Labrador",
-//   "Territoires du Nord-Ouest",
-//   "Yukon",
-//   "Nunavut",
-// ];
+export default function Sidebar() {
+  const pathname = usePathname();
 
-export default function Sidebar({ selectedYear }) {
-  const router = useRouter();
-
-  const provinces = [
-    { name: "Québec", slug: "quebec" },
-    { name: "Ontario", slug: "ontario" },
-    { name: "Alberta", slug: "alberta" },
-    { name: "Manitoba", slug: "manitoba" },
-    { name: "Saskatchewan", slug: "saskatchewan" },
-    { name: "Colombie-Britannique", slug: "colombie-britannique" },
-    { name: "Nouvelle-Écosse", slug: "nouvelle-ecosse" },
-    { name: "Nouveau-Brunswick", slug: "nouveau-brunswick" },
-    { name: "Île-du-Prince-Édouard", slug: "ile-du-prince-edouard" },
-    { name: "Terre-Neuve-et-Labrador", slug: "terre-neuve-et-labrador" },
-    { name: "Territoires du Nord-Ouest", slug: "territoires-du-nord-ouest" },
-    { name: "Yukon", slug: "yukon" },
-    { name: "Nunavut", slug: "nunavut" },
+  const links = [
+    { label: "🏠 Home", path: "/" },
+    { label: "📈 Graphiques", path: "/graphiques" },
+    { label: "📊 Statistiques", path: "/statistiques" },
   ];
 
-  const pathname = usePathname();
-  const selectedProvince = pathname.split("/")[1];
-
-  const selectedProvinceName = provinces.find(
-    (p) => p.slug === selectedProvince
-  )?.name;
-
-  const handleClick = (slug) => {
-    router.push(`/${slug}/${selectedYear}`);
-  };
-
   return (
-    <aside className="w-60 bg white border-r p-4">
-      <h2 className="text-lg font-bold mb-4">Provinces</h2>
-      <ul className="space-y-2">
-        {provinces.map(({ name, slug }) => (
-          <li key={slug}>
-            <button
-              onClick={() => handleClick(slug)}
-              className={`w-full text-left px-3 py-2 rounded ${
-                selectedProvince === slug
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-100 hover:bg-gray-200"
-              }`}
-            >
-              {name}
-            </button>
-          </li>
+    <aside className="w-60 min-h-screen bg-teal-600 border-r p-6">
+      <h2 className="text-xl font-bold mb-6 text-white">Navigation</h2>
+      <nav className="flex flex-col space-y-4">
+        {links.map(({ label, path }) => (
+          <Link
+            key={path}
+            href={path}
+            className={`px-4 py-2 rounded font-medium text-left ${
+              pathname === path
+                ? "bg-teal-500 text-white"
+                : "text-white hover:bg-teal-700"
+            }`}
+          >
+            {label}
+          </Link>
         ))}
-      </ul>
-
-      <div className="mt-6 text-sm text-gray-500">
-        Province sélectionnée : <strong>{selectedProvinceName}</strong>
-      </div>
+      </nav>
     </aside>
   );
 }
